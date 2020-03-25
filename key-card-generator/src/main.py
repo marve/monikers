@@ -15,9 +15,6 @@ tile_size = 26
 base_tiles = [assassin] + [neutral for _ in range(7)]
 random.seed(0)
 
-# border.paste(blue, (39, 39))
-# border.save('out.png')
-
 class KeyGrid:
   border: Image = None
   tiles: List = []
@@ -25,7 +22,7 @@ class KeyGrid:
   def __init__(self, border: Image, tiles: List):
     self.border = border
     self.tiles = tiles
-  
+
   def draw(self, out_path: str):
     grid = Image.new('RGBA', (216, 216), color = 'black')
     grid.paste(self.border)
