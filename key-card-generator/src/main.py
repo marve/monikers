@@ -52,4 +52,4 @@ for idx in range(40):
     grid = make_blue_grid()
   else:
     grid = make_red_grid()
-  grid.draw(f'grid-{idx}.png')
+  grid.draw(f'key-card-generator/resources/generated/grid-{idx}.png')
