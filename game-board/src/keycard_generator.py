@@ -16,7 +16,7 @@ assassin = Image.open(f'{resource_path}/assassin.png', 'r')
 tile_padding = 2
 border_margin = 37
 tile_size = 26
-random.seed(0)
+random.seed()
 
 class TileType(Enum):
   NEUTRAL = 1,
