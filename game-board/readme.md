@@ -1,5 +1,8 @@
 # game-board
 Build a game board
+word_list.py: CLI tool to generate words for game play.
+keycard_generator: CLI tool to generate grid keys for game play.
+
 
 ## Setup development environment
 __Requires Python 3.6+__
