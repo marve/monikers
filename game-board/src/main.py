@@ -47,6 +47,7 @@ while True:
 
   app = gui('Monikers')
   app.setLogLevel('ERROR')
+  app.setFullscreen()
   app.setImageLocation('game-board/resources')
 
   app.startFrame("BLUE_GUTTER", row=0, column=0)
