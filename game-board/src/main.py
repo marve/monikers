@@ -1,8 +1,7 @@
 from appJar import gui
 from word_list import get_word_set
 from keycard_generator import BlueKeyGrid, RedKeyGrid, Tile, TileType, load_keygrid
-# import pprint
-# pp = pprint.PrettyPrinter(indent=2)
+from comms import send_mms
 
 game_number = 0
 blue_cards = []
@@ -26,14 +25,28 @@ def pop_blue():
 def pop_none():
   pass
 
+def pick_spymaster(team):
+  team = team.lower()
+  while True:
+    spymaster = input(f'What is the phone number of the {team.title()} Spymaster? ')
+    msg = f'You are the Spymaster for the {team.title()} team! Give one word clues to help your team guess the {team} words. Careful to avoid the \'X\' word!'
+    keygrid_url = f'https://raw.githubusercontent.com/marve/monikers/master/game-board/resources/generated/grid-{game_number}.png'
+    try:
+      send_mms(spymaster, msg, keygrid_url)
+      if input(f'Did the {team.title()} Spymaster get the message? ').lower()[:1] == 'y':
+        break
+    except Exception as e: print(e)
+    print('Let\'s try again')
+
 while True:
+  print(f'Setting up game {game_number}')
   words = get_word_set(game_number)
   keygrid = load_keygrid(game_number)
-  red_spymaster = input('Who will be red spymaster? ')
-  blue_spymaster = input('Who will be blue spymaster? ')
-  print(f'Building game board for game {game_number}...')
+  pick_spymaster('red')
+  pick_spymaster('blue')
 
   app = gui('Monikers')
+  app.setLogLevel('ERROR')
   app.setImageLocation('game-board/resources')
 
   app.startFrame("BLUE_GUTTER", row=0, column=0)
@@ -87,7 +100,6 @@ while True:
     red_cards.append(get_image_widget(name))
     app.zoomImage(name, -2)
   app.stopFrame()
-  #pp.pprint(app.widgetManager.widgets)
 
   app.go()
   game_number = game_number + 1
