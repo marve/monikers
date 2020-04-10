@@ -2,6 +2,7 @@ from appJar import gui
 from word_list import get_word_set
 from keycard_generator import BlueKeyGrid, RedKeyGrid, Tile, TileType, load_keygrid
 from comms import send_mms
+import os
 
 game_number = 0
 blue_cards = []
@@ -24,6 +25,26 @@ def pop_blue():
 
 def pop_none():
   pass
+
+def toggle_blue_gender(e):
+  toggle_gender('blue')
+
+def toggle_red_gender(e):
+  toggle_gender('red')
+
+def toggle_gender(color):
+  images = app.widgetManager.group(10, None)
+  for key in images.keys():
+    image_path = os.path.basename(images[key].image.path)
+    if color in image_path:
+      if 'gal' in image_path:
+        print(f'there is a gal in this {color} image {image_path} {key}')
+        app.setImage(key, f'{color}-dude.png')
+      else:
+        print(f'there is a dude in this {color} image {image_path} {key}')
+        app.setImage(key, f'{color}-gal.png')
+      if key.startswith(color):
+        app.zoomImage(key, -2)
 
 def pick_spymaster(team):
   team = team.lower()
@@ -54,10 +75,11 @@ while True:
   num_blue_cards = 9 if type(keygrid) is BlueKeyGrid else 8
   blue_cards = []
   for idx in range(num_blue_cards):
-    name = f'blue-gal{idx}'
+    name = f'blue{idx}'
     app.addImage(name, 'blue-gal.png')
     blue_cards.append(get_image_widget(name))
     app.zoomImage(name, -2)
+    get_image_widget(name).bind('<ButtonRelease-1>', toggle_blue_gender)
   app.stopFrame()
 
   app.startFrame("BOARD", row=0, column=1)
@@ -96,10 +118,11 @@ while True:
   red_cards = []
   num_red_cards = 9 if type(keygrid) is RedKeyGrid else 8
   for idx in range(num_red_cards):
-    name = f'red-dude{idx}'
+    name = f'red{idx}'
     app.addImage(name, 'red-dude.png')
     red_cards.append(get_image_widget(name))
     app.zoomImage(name, -2)
+    get_image_widget(name).bind('<ButtonRelease-1>', toggle_red_gender)
   app.stopFrame()
 
   app.go()
