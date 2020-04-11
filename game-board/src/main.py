@@ -1,10 +1,12 @@
 from appJar import gui
 from word_list import get_word_set
-from keycard_generator import BlueKeyGrid, RedKeyGrid, Tile, TileType, load_keygrid
+from keycard_generator import BlueKeyGrid, RedKeyGrid, Tile, TileType, load_keygrid, max_grids
 from comms import send_mms
-import os
+import os, random
 
-game_number = 0
+game_number = 1
+grid_numbers = list(range(max_grids))
+random.shuffle(grid_numbers)
 blue_cards = []
 red_cards = []
 
@@ -38,20 +40,18 @@ def toggle_gender(color):
     image_path = os.path.basename(images[key].image.path)
     if color in image_path:
       if 'gal' in image_path:
-        print(f'there is a gal in this {color} image {image_path} {key}')
         app.setImage(key, f'{color}-dude.png')
       else:
-        print(f'there is a dude in this {color} image {image_path} {key}')
         app.setImage(key, f'{color}-gal.png')
       if key.startswith(color):
         app.zoomImage(key, -2)
 
-def pick_spymaster(team):
+def pick_spymaster(team, grid_number):
   team = team.lower()
   while True:
     spymaster = input(f'What is the phone number of the {team.title()} Spymaster? ')
     msg = f'You are the Spymaster for the {team.title()} team! Give one word clues to help your team guess the {team} words. Careful to avoid the \'X\' word!'
-    keygrid_url = f'https://raw.githubusercontent.com/marve/monikers/master/game-board/resources/generated/grid-{game_number}.png'
+    keygrid_url = f'https://raw.githubusercontent.com/marve/monikers/master/game-board/resources/generated/grid-{grid_number}.png'
     try:
       send_mms(spymaster, msg, keygrid_url)
       if input(f'Did the {team.title()} Spymaster get the message? ').lower()[:1] == 'y':
@@ -62,9 +62,10 @@ def pick_spymaster(team):
 while True:
   print(f'Setting up game {game_number}')
   words = get_word_set(game_number)
-  keygrid = load_keygrid(game_number)
-  pick_spymaster('red')
-  pick_spymaster('blue')
+  grid_number = grid_numbers.pop()
+  keygrid = load_keygrid(grid_number)
+  pick_spymaster('red', grid_number)
+  pick_spymaster('blue', grid_number)
 
   app = gui('Monikers')
   app.setLogLevel('ERROR')

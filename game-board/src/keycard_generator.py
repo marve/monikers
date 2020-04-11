@@ -16,6 +16,7 @@ assassin = Image.open(f'{resource_path}/assassin.png', 'r')
 tile_padding = 2
 border_margin = 37
 tile_size = 26
+max_grids = 40
 random.seed()
 
 class TileType(Enum):
@@ -80,7 +81,7 @@ def load_keygrid(idx) -> KeyGrid:
     return pickle.load(f)
 
 def main():
-  for idx in range(40):
+  for idx in range(max_grids):
     if random.randint(0, 1):
       grid = make_blue_grid()
     else:
