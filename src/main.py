@@ -46,12 +46,11 @@ def toggle_gender(color):
       if key.startswith(color):
         app.zoomImage(key, -2)
 
-def pick_spymaster(team, grid_number):
+def pick_spymaster(team, keygrid_url):
   team = team.lower()
   while True:
     spymaster = input(f'What is the phone number of the {team.title()} Spymaster? ')
     msg = f'You are the Spymaster for the {team.title()} team! Give one word clues to help your team guess the {team} words. Careful to avoid the \'X\' word!'
-    keygrid_url = f'https://raw.githubusercontent.com/marve/monikers/master/resources/generated/grid-{grid_number}.png'
     try:
       send_mms(spymaster, msg, keygrid_url)
       if input(f'Did the {team.title()} Spymaster get the message? ').lower()[:1] == 'y':
@@ -60,12 +59,13 @@ def pick_spymaster(team, grid_number):
     print('Let\'s try again')
 
 while True:
-  print(f'Setting up game {game_number}')
   words = get_word_set(game_number)
   grid_number = grid_numbers.pop()
+  keygrid_url = f'https://raw.githubusercontent.com/marve/monikers/master/resources/generated/grid-{grid_number}.png'
+  print(f'Setting up game {game_number}')# using {keygrid_url}')
   keygrid = load_keygrid(grid_number)
-  pick_spymaster('red', grid_number)
-  pick_spymaster('blue', grid_number)
+  pick_spymaster('red', keygrid_url)
+  pick_spymaster('blue', keygrid_url)
 
   app = gui('Monikers')
   app.setLogLevel('ERROR')
