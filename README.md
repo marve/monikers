@@ -53,11 +53,12 @@ pip install -r requirements.txt
 sudo apt install python3-tk
 ```
 
-### Set environment variables with Twilio credentials
+### Set environment variables with Twilio info
 
 ```bash
 export TWILIO_SID='abc123' # Use your Twilio SID.
 export TWILIO_TOKEN='def456' # Use your Twilio auth token.
+export TWILIO_NUMBER='+12345678910' # Use your Twilio number.
 ```
 
 ### Run the application
