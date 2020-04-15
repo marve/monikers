@@ -4,7 +4,7 @@ import random
 import pickle
 from enum import Enum
 
-resource_path = 'game-board/resources'
+resource_path = 'resources'
 generated_path = f'{resource_path}/generated/grid-'
 red_border_path = f'{resource_path}/red-border.png'
 blue_border_path = f'{resource_path}/blue-border.png'

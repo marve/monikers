@@ -3,7 +3,7 @@ import random
 from autocorrect import Speller
 
 words = []
-with open('game-board/resources/wordlist.csv') as wordlist_csv:
+with open('resources/wordlist.csv') as wordlist_csv:
   reader = csv.reader(wordlist_csv, delimiter=',', quotechar='"')
   for row in reader:
     words.append(row[0])

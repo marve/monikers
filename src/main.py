@@ -51,7 +51,7 @@ def pick_spymaster(team, grid_number):
   while True:
     spymaster = input(f'What is the phone number of the {team.title()} Spymaster? ')
     msg = f'You are the Spymaster for the {team.title()} team! Give one word clues to help your team guess the {team} words. Careful to avoid the \'X\' word!'
-    keygrid_url = f'https://raw.githubusercontent.com/marve/monikers/master/game-board/resources/generated/grid-{grid_number}.png'
+    keygrid_url = f'https://raw.githubusercontent.com/marve/monikers/master/resources/generated/grid-{grid_number}.png'
     try:
       send_mms(spymaster, msg, keygrid_url)
       if input(f'Did the {team.title()} Spymaster get the message? ').lower()[:1] == 'y':
@@ -70,7 +70,7 @@ while True:
   app = gui('Monikers')
   app.setLogLevel('ERROR')
   app.setFullscreen()
-  app.setImageLocation('game-board/resources')
+  app.setImageLocation('resources')
 
   app.startFrame("BLUE_GUTTER", row=0, column=0)
   num_blue_cards = 9 if type(keygrid) is BlueKeyGrid else 8
