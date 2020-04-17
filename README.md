@@ -6,6 +6,7 @@ A team-based word guessing game for 4+ players. Intended for use over video conf
 
 * Python 3.6+
 * Twilio Account (Free trial account is sufficient)
+* Ubuntu 18.04+
 
 ## How does it work?
 
