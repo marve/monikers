@@ -1,4 +1,4 @@
-@echo on
+@echo off
 set VENV_DIR=.venv
 if exist %VENV_DIR% (
   echo "Re-using existing venv"
