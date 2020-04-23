@@ -4,6 +4,12 @@ VENV_DIR=".venv"
 source .venv/bin/activate
 python -m pip install -r requirements.txt -q
 sudo apt install python3-tk -y
-echo "Starting game. Press Ctrl+C followed by Y and then Enter to exit"
-read -p 'Username: ' uservar
-read -sp 'Password: ' passvar
+read -p 'What is the Twilio SID? ' TWILIO_SID
+read -sp 'What is the Twilio auth token? ' TWILIO_TOKEN
+echo 
+read -p 'What is the Twilio number? ' TWILIO_NUMBER
+echo "Starting game. Press <Ctrl+C> followed by <Enter> to exit"
+export TWILIO_SID
+export TWILIO_TOKEN
+export TWILIO_NUMBER
+python src/main.py
