@@ -5,8 +5,9 @@ A team-based word guessing game for 4+ players. Intended for use over video conf
 ## Requirements
 
 * Python 3.6+
-* Twilio Account (Free trial account is sufficient)
-* Ubuntu 18.04+
+* Twilio Account
+  * Free trial account is sufficient, but you will have to pre-register every spymaster number.
+* Ubuntu 18.04+ or Windows 10
 
 ## How does it work?
 
@@ -30,40 +31,16 @@ These instructions will get you a copy of the project up and running on your loc
 git clone https://github.com/marve/monikers.git
 ```
 
-### Create a virtual environment
+### Linux
 
 ```bash
-python3 -m venv .venv
+./start.sh
 ```
 
-### Load virtual environment
+### Windows
 
-```bash
-source .venv/bin/activate
-```
+_Must have installed python with tkinter included!_
 
-### Install Python dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### Ensure tkinter is installed
-
-```bash
-sudo apt install python3-tk
-```
-
-### Set environment variables with Twilio info
-
-```bash
-export TWILIO_SID='abc123' # Use your Twilio SID.
-export TWILIO_TOKEN='def456' # Use your Twilio auth token.
-export TWILIO_NUMBER='+12345678910' # Use your Twilio number.
-```
-
-### Run the application
-
-```bash
-python src/main.py
+```batch
+start.cmd
 ```
