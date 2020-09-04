@@ -5,7 +5,7 @@ if exist %VENV_DIR% (
 ) else (
   python -m venv %VENV_DIR%
 )
-call %VENV_DIR%\scripts\activate.bat
+call %VENV_DIR%\Scripts\activate
 python -m pip install -r requirements.txt -qq
 set /p TWILIO_SID="What is the Twilio SID? "
 Call:InputPassword "What is the Twilio auth token? " TWILIO_TOKEN
