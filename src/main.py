@@ -50,7 +50,7 @@ def pick_spymaster(team, keygrid_url):
   team = team.lower()
   while True:
     spymaster = input(f'What is the phone number of the {team.title()} Spymaster? ')
-    msg = f'You are the Spymaster for the {team.title()} team! Give one word clues to help your team guess the {team} words. Careful to avoid the \'X\' word!'
+    msg = f'You are the Spymaster for the {team.title()} team! Give one-word clues to help your team guess the {team} words. Careful to avoid the \'X\' word!'
     try:
       send_mms(spymaster, msg, keygrid_url)
       if input(f'Did the {team.title()} Spymaster get the message? ').lower()[:1] == 'y':
